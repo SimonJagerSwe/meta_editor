@@ -18,7 +18,12 @@ name_replacement_arg = rf""
 # Main function
 def main():
     print("Hello, editor!")
+    args()
 
+
+# Collect arguments
+def args():
+    ...
 
 # Execute main function if main
 if __name__ == "__main__":
