@@ -17,15 +17,20 @@ name_replacement_arg = ""
 name_insert_arg = ""
 
 
+
 # Main function
 def main():
     print("Hello, editor!")
-    args = parse_args(performers_arg)
+    args = parse_args(directory_arg)
+    # print(type(args))
     print(args)
+    file_dir = args[0]
+    print(file_dir)
+    files_list = find_files(file_dir)
 
 
 # Collect arguments
-def parse_args():
+def parse_args(args):
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--directory", help="Album directory")
     parser.add_argument("-p", "--performer", help="Album performer(s)")
@@ -36,24 +41,27 @@ def parse_args():
     parser.add_argument("-r", "--replacement", help="Characters in song titles to remove")
     parser.add_argument("-i", "--insert", help="Character to be inserted in place of removed character")
     args = parser.parse_args()
-    directory_arg = f"{args.directory}"
+    directory_arg = rf"{args.directory}"
     performers_arg = f"{args.performer}"
     artist_arg = f"{args.artist}"
     album_arg = f"{args.album}"
     year_arg = f"{args.year}"
-    genre_arg = f"{args.genre}"
-    name_replacement_arg = f"{args.replacement}"
-    name_insert_arg = f"{args.insert}"
-    return [
-        directory_arg,
-        performers_arg,
-        artist_arg,
-        album_arg,
-        year_arg,
-        genre_arg,
-        name_replacement_arg,
-        name_insert_arg
-        ]
+    genre_arg = f"{args.genre}"    
+    args_list = [directory_arg, 
+                 performers_arg, 
+                 artist_arg, 
+                 album_arg, 
+                 year_arg, 
+                 genre_arg]
+    if args.replacement is not None:
+        name_replacement_arg = f"{args.replacement}"
+        args_list.append(name_replacement_arg) # 
+        name_insert_arg = f"{args.insert}"
+        args_list.append(name_insert_arg)
+    return args_list
+
+def find_files(dir):
+    print("Fetching files...")
 
 # Execute main function if main
 if __name__ == "__main__":
