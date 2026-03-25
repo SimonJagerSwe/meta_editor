@@ -3,8 +3,6 @@ import argparse
 import os
 import sys
 
-# Constants
-
 # Args
 directory_arg = ""
 performers_arg = ""
@@ -17,16 +15,16 @@ name_replacement_arg = ""
 name_insert_arg = ""
 
 
-
 # Main function
 def main():
     print("Hello, editor!")
     args = parse_args(directory_arg)
     # print(type(args))
-    print(args)
+    # print(args)
     file_dir = args[0]
-    print(file_dir)
+    # print(file_dir)
     files_list = find_files(file_dir)
+    print(files_list)
 
 
 # Collect arguments
@@ -60,8 +58,15 @@ def parse_args(args):
         args_list.append(name_insert_arg)
     return args_list
 
+
+# Find files from directory argument
 def find_files(dir):
+    song_list = []
     print("Fetching files...")
+    for song in os.listdir(dir):
+        song = song.title()
+        song_list.append(song)
+    return song_list
 
 # Execute main function if main
 if __name__ == "__main__":
