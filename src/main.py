@@ -12,10 +12,8 @@ directory_arg = ""
 def main():
     print("Hello, editor!")
     args = parse_args(directory_arg)
-    # print(args)
     file_dir = args["album_directory"]
     files_list = find_files(file_dir)
-    # print(files_list)
     update_files(files_list, args)
     print("Done!")
 
